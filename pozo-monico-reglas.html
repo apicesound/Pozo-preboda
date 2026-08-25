@@ -1,0 +1,207 @@
+<title>Reglas del Pozo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#eef1ea;
+    --paper-raised:#f8faf5;
+    --ink:#17302b;
+    --muted:#56685f;
+    --court:#2f6f5e;
+    --court-deep:#1c4a40;
+    --ball:#a8b520;
+    --ball-ink:#1c2400;
+    --line:rgba(23,48,43,0.14);
+    --line-strong:rgba(23,48,43,0.28);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#122220;
+      --paper-raised:#182b27;
+      --ink:#e9efe8;
+      --muted:#9db3ab;
+      --court:#4a9484;
+      --court-deep:#bfe3d8;
+      --ball:#d7e75a;
+      --ball-ink:#1c2400;
+      --line:rgba(233,239,232,0.14);
+      --line-strong:rgba(233,239,232,0.28);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#122220;
+    --paper-raised:#182b27;
+    --ink:#e9efe8;
+    --muted:#9db3ab;
+    --court:#4a9484;
+    --court-deep:#bfe3d8;
+    --ball:#d7e75a;
+    --ball-ink:#1c2400;
+    --line:rgba(233,239,232,0.14);
+    --line-strong:rgba(233,239,232,0.28);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans',system-ui,sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--ball); color:var(--ball-ink); }
+
+  .wrap{ max-width:640px; margin:0 auto; padding:0 22px 72px; }
+
+  .hero{ padding:44px 0 32px; border-bottom:2px solid var(--line-strong); margin-bottom:36px; }
+  .eyebrow{
+    font-size:13px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--court); display:flex; align-items:center; gap:10px; margin-bottom:16px;
+  }
+  .eyebrow::before{ content:""; width:26px; height:3px; background:var(--ball); display:inline-block; }
+  h1{
+    font-family:'Anton',Impact,'Arial Narrow Bold',sans-serif;
+    font-weight:400; font-size:clamp(2.3rem,9vw,3.2rem); line-height:0.98;
+    margin:0 0 14px; text-wrap:balance; color:var(--ink);
+  }
+  .hero p.lede{ max-width:48ch; font-size:1.08rem; color:var(--muted); margin:0; }
+  .presented-by{
+    font-style:italic; font-size:0.92rem; color:var(--court-deep,var(--court));
+    margin:0 0 16px; max-width:48ch;
+  }
+  .presented-by b{ font-style:normal; }
+
+  .sponsor-strip{
+    margin-top:20px; padding:12px 16px; background:var(--paper-raised); border:1px dashed var(--line-strong);
+    font-size:0.8rem; color:var(--muted); display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;
+  }
+  .sponsor-strip .label{
+    font-size:0.65rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--ball-ink);
+    background:var(--ball); padding:3px 7px;
+  }
+  .sponsor-strip b{ color:var(--ink); }
+
+  section{ margin-bottom:44px; }
+  .section-head{ margin-bottom:18px; }
+  .section-head h2{
+    font-family:'Anton',sans-serif; font-weight:400; font-size:1.35rem; margin:0 0 4px; color:var(--ink);
+  }
+  .section-head p{ margin:0; color:var(--muted); font-size:0.9rem; }
+
+  /* ---------- 3 REGLAS ---------- */
+  .rules{ display:flex; flex-direction:column; gap:14px; }
+  .rule{
+    display:grid; grid-template-columns:44px 1fr; gap:16px; align-items:start;
+    background:var(--paper-raised); border:1px solid var(--line); padding:16px 18px;
+  }
+  .rule .num{
+    font-family:'Anton',sans-serif; font-size:1.6rem; color:var(--ball-ink);
+    background:var(--ball); width:44px; height:44px; display:flex; align-items:center; justify-content:center;
+  }
+  .rule .txt b{ display:block; font-size:1.02rem; margin-bottom:3px; }
+  .rule .txt span{ font-size:0.88rem; color:var(--muted); }
+
+  /* ---------- ESCALERA ---------- */
+  .ladder{ display:flex; flex-direction:column; gap:0; border:1px solid var(--line); background:var(--paper-raised); }
+  .lrow{
+    display:grid; grid-template-columns:1fr auto; align-items:center; gap:10px;
+    padding:14px 18px; border-top:1px dashed var(--line);
+  }
+  .lrow:first-child{ border-top:none; }
+  .lrow .pname{ font-family:'Anton',sans-serif; font-size:1.15rem; color:var(--ink); display:flex; align-items:center; gap:8px; }
+  .crown{
+    font-size:0.62rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
+    background:var(--court); color:var(--paper-raised); padding:3px 8px;
+  }
+  .lrow .move{ font-size:0.82rem; color:var(--muted); text-align:right; }
+  .lrow .move b{ color:var(--court-deep,var(--court)); }
+
+  /* ---------- RONDA 1 ---------- */
+  .r1-card{ background:var(--paper-raised); border:1px solid var(--line); }
+  .r1-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 18px; border-bottom:2px solid var(--court);
+  }
+  .r1-head .t{ font-family:'Anton',sans-serif; font-size:1.3rem; color:var(--ink); }
+  .r1-head time{ font-variant-numeric:tabular-nums; font-size:0.88rem; font-weight:600; color:var(--court); }
+  .match{
+    display:grid; grid-template-columns:64px 1fr; gap:14px; align-items:center;
+    padding:13px 18px; border-top:1px dashed var(--line);
+  }
+  .match:first-child{ border-top:none; }
+  .pista{ font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--court); }
+  .pista em{ font-style:normal; display:block; font-family:'Anton',sans-serif; font-size:1.05rem; color:var(--ink); letter-spacing:0; }
+  .pista small{ display:block; font-size:0.6rem; color:var(--ball-ink); background:var(--ball); padding:1px 5px; margin-top:3px; width:fit-content; font-weight:700; letter-spacing:0.06em; }
+  .vs{ font-size:1rem; }
+  .vs b{ font-weight:600; }
+  .vs .x{ color:var(--muted); font-weight:400; padding:0 6px; font-size:0.82rem; }
+  .rest-line{ padding:14px 18px 16px; border-top:1px solid var(--line); font-size:0.86rem; color:var(--muted); }
+  .rest-line b{ color:var(--ink); font-weight:600; }
+
+  .callout{
+    margin-top:22px; padding:14px 16px; background:var(--paper-raised);
+    border-left:3px solid var(--ball); font-size:0.92rem; color:var(--ink);
+  }
+
+  footer{ margin-top:52px; padding-top:18px; border-top:1px solid var(--line); font-size:0.85rem; color:var(--muted); }
+</style>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Preboda · Pozo de pádel</div>
+    <h1>Reglas del Pozo</h1>
+    <p class="presented-by">Pozo Preboda David &amp; Elena — <b>presented by</b> «Que no se note que llevo sin coger una pala en un año»</p>
+    <p class="lede">18:00 a 20:00 · 4 pistas · 6 rondas de 18 minutos. Tres reglas y ya está: el resto sale solo según quién vaya ganando.</p>
+    <div class="sponsor-strip"><span class="label">Patrocinador Oficial</span> <b>Ibuprofeno 600®</b> — Sponsor Platino del día después.</div>
+  </header>
+
+  <section id="reglas">
+    <div class="section-head"><h2>Las tres reglas</h2></div>
+    <div class="rules">
+      <div class="rule">
+        <div class="num">1</div>
+        <div class="txt"><b>Ganas → subes de pista.</b><span>Si ya estás en la Pista 5 Reina, te quedas ahí.</span></div>
+      </div>
+      <div class="rule">
+        <div class="num">2</div>
+        <div class="txt"><b>Pierdes → descansas una ronda.</b><span>Solo una. En la siguiente vuelves a jugar seguro.</span></div>
+      </div>
+      <div class="rule">
+        <div class="num">3</div>
+        <div class="txt"><b>Vuelves → entras en la pista justo debajo de donde perdiste.</b><span>Perdiste en la Reina, entras en la 6. Perdiste en la 8, vuelves a la 8.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="escalera">
+    <div class="section-head"><h2>La escalera</h2><p>De arriba abajo</p></div>
+    <div class="ladder">
+      <div class="lrow"><div class="pname">Pista 5 <span class="crown">Reina</span></div><div class="move">gana y <b>te quedas</b></div></div>
+      <div class="lrow"><div class="pname">Pista 6</div><div class="move">gana y <b>subes</b></div></div>
+      <div class="lrow"><div class="pname">Pista 7</div><div class="move">gana y <b>subes</b></div></div>
+      <div class="lrow"><div class="pname">Pista 8</div><div class="move">gana y <b>subes</b></div></div>
+    </div>
+    <div class="callout">Pierdas donde pierdas, descansas una ronda y vuelves un escalón por debajo de donde perdiste. Nadie se queda fuera más de un turno.</div>
+  </section>
+
+  <section id="ronda1">
+    <div class="section-head"><h2>Ronda 1</h2><p>Así arrancamos — a partir de aquí, gana y pierde quien juegue</p></div>
+    <div class="r1-card">
+      <div class="r1-head"><div class="t">18:00 – 18:18</div><time>Ronda 1</time></div>
+      <div class="match"><div class="pista">Pista<em>5</em><small>Reina</small></div><div class="vs"><b>Moni + Vicen</b><span class="x">vs</span><b>Laura + Espinos</b></div></div>
+      <div class="match"><div class="pista">Pista<em>6</em></div><div class="vs"><b>Chus + Baquero</b><span class="x">vs</span><b>Tito + Mayoral</b></div></div>
+      <div class="match"><div class="pista">Pista<em>7</em></div><div class="vs"><b>Sergio + Pablo</b><span class="x">vs</span><b>Antonio + Miguel</b></div></div>
+      <div class="match"><div class="pista">Pista<em>8</em></div><div class="vs"><b>Luiska + Gómez</b><span class="x">vs</span><b>Luna + Marina</b></div></div>
+      <div class="rest-line"><b>Descansan:</b> Alejandro + Nacho Moldes, Manterola + Nacho Gómez, Pallín + Carmen, Gonzalo + Rebeca.<br>Entráis en la Ronda 2 en este orden — <b>Alejandro + Nacho Moldes</b> a pista 6, <b>Manterola + Nacho Gómez</b> a pista 7, <b>Gonzalo + Rebeca</b> y <b>Pallín + Carmen</b> a pista 8.</div>
+    </div>
+  </section>
+
+  <footer>
+    A partir de la Ronda 2 todo se mueve solo con las tres reglas de arriba. ¡Suerte a todos! Jugad con ganas, pero guardad algo de cuerpo — que el sábado hay boda. 🎾
+  </footer>
+
+</div>
