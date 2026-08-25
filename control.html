@@ -1,0 +1,480 @@
+<title>El Pozo de Mónico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#eef1ea;
+    --paper-raised:#f8faf5;
+    --ink:#17302b;
+    --muted:#56685f;
+    --court:#2f6f5e;
+    --court-deep:#1c4a40;
+    --ball:#a8b520;
+    --ball-ink:#1c2400;
+    --line:rgba(23,48,43,0.14);
+    --line-strong:rgba(23,48,43,0.28);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#122220;
+      --paper-raised:#182b27;
+      --ink:#e9efe8;
+      --muted:#9db3ab;
+      --court:#4a9484;
+      --court-deep:#bfe3d8;
+      --ball:#d7e75a;
+      --ball-ink:#1c2400;
+      --line:rgba(233,239,232,0.14);
+      --line-strong:rgba(233,239,232,0.28);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#122220;
+    --paper-raised:#182b27;
+    --ink:#e9efe8;
+    --muted:#9db3ab;
+    --court:#4a9484;
+    --court-deep:#bfe3d8;
+    --ball:#d7e75a;
+    --ball-ink:#1c2400;
+    --line:rgba(233,239,232,0.14);
+    --line-strong:rgba(233,239,232,0.28);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans',system-ui,sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--ball); color:var(--ball-ink); }
+
+  .wrap{ max-width:920px; margin:0 auto; padding:0 24px 96px; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:56px 0 40px;
+    border-bottom:2px solid var(--line-strong);
+    margin-bottom:40px;
+  }
+  .eyebrow{
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--court);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:26px; height:3px;
+    background:var(--ball);
+    display:inline-block;
+  }
+  h1{
+    font-family:'Anton',Impact,'Arial Narrow Bold',sans-serif;
+    font-weight:400;
+    font-size:clamp(2.6rem,6vw,4.2rem);
+    line-height:0.95;
+    letter-spacing:0.005em;
+    margin:0 0 18px;
+    text-wrap:balance;
+    color:var(--ink);
+  }
+  .hero p.lede{
+    max-width:62ch;
+    font-size:1.15rem;
+    color:var(--muted);
+    margin:0 0 28px;
+  }
+  .hero-facts{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .fact{
+    border:1px solid var(--line-strong);
+    background:var(--paper-raised);
+    padding:8px 14px;
+    font-size:0.85rem;
+    font-weight:600;
+    color:var(--ink);
+    display:flex;
+    gap:6px;
+    align-items:baseline;
+  }
+  .fact b{ font-family:'Anton',sans-serif; font-weight:400; font-size:1.05rem; color:var(--court); }
+
+  /* ---------- SECTION HEADERS ---------- */
+  section{ margin-bottom:56px; }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:16px;
+    margin-bottom:20px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:10px;
+  }
+  .section-head h2{
+    font-family:'Anton',sans-serif;
+    font-weight:400;
+    font-size:1.5rem;
+    margin:0;
+    color:var(--ink);
+  }
+  .section-head .n{
+    font-family:'Work Sans',sans-serif;
+    font-size:0.85rem;
+    font-weight:600;
+    color:var(--muted);
+  }
+
+  /* ---------- EXPLICACIÓN ---------- */
+  .explain-grid{
+    display:grid;
+    grid-template-columns:0.95fr 1.05fr;
+    gap:32px;
+    align-items:start;
+  }
+  @media (max-width:760px){ .explain-grid{ grid-template-columns:1fr; } }
+
+  .explain p{ margin:0 0 14px; max-width:60ch; }
+  .explain strong{ color:var(--court-deep,var(--court)); }
+
+  .callout{
+    margin-top:18px;
+    padding:14px 16px;
+    background:var(--paper-raised);
+    border-left:3px solid var(--ball);
+    font-size:0.92rem;
+    color:var(--ink);
+  }
+
+  /* ---------- ESCALERA (diagrama) ---------- */
+  .ladder-card{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    padding:20px 24px 22px;
+  }
+  .ladder-card h3{
+    font-size:0.8rem;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    color:var(--muted);
+    margin:0 0 14px;
+    font-weight:600;
+  }
+  .ladder-row{
+    position:relative;
+    display:grid;
+    grid-template-columns:64px 1fr;
+    gap:14px;
+    padding:10px 0;
+    border-top:1px dashed var(--line);
+  }
+  .ladder-row:first-child{ border-top:none; }
+  .lp{
+    font-family:'Anton',sans-serif;
+    font-size:1.3rem;
+    color:var(--ink);
+    line-height:1.1;
+    display:flex;
+    flex-direction:column;
+  }
+  .lp span{ font-family:'Work Sans',sans-serif; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); font-weight:600; }
+  .lline{ font-size:0.86rem; display:flex; gap:6px; align-items:baseline; flex-wrap:wrap; }
+  .lline b.win{ color:var(--court-deep,var(--court)); font-weight:700; }
+  .lline b.lose{ color:var(--muted); font-weight:700; }
+  .arrow{ color:var(--ball); font-weight:700; }
+  .ladder-entry{
+    margin-top:14px;
+    padding-top:14px;
+    border-top:2px solid var(--court);
+    font-size:0.86rem;
+    color:var(--muted);
+  }
+  .ladder-entry b{ color:var(--ink); }
+
+  /* ---------- RONDAS ---------- */
+  .rounds{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+    gap:18px;
+  }
+  .round-card{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    display:flex;
+    flex-direction:column;
+  }
+  .round-card.example{ border-style:dashed; border-color:var(--line-strong); }
+  .round-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 18px;
+    border-bottom:2px solid var(--court);
+    gap:10px;
+  }
+  .round-head .r-num{
+    font-family:'Anton',sans-serif;
+    font-size:1.6rem;
+    color:var(--ink);
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+  }
+  .round-head .r-num span{
+    font-family:'Work Sans',sans-serif;
+    font-size:0.75rem;
+    font-weight:600;
+    color:var(--muted);
+    letter-spacing:0.06em;
+  }
+  .round-head time{
+    font-variant-numeric:tabular-nums;
+    font-size:0.85rem;
+    font-weight:600;
+    color:var(--court);
+    margin-right:auto;
+    margin-left:10px;
+  }
+  .tag-example{
+    font-size:0.66rem;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--ball-ink);
+    background:var(--ball);
+    padding:3px 8px;
+  }
+  .matches{ padding:12px 18px 6px; flex:1; }
+  .match{
+    display:grid;
+    grid-template-columns:56px 1fr;
+    gap:12px;
+    align-items:center;
+    padding:9px 0;
+    border-top:1px dashed var(--line);
+  }
+  .match:first-child{ border-top:none; }
+  .pista{
+    font-size:0.72rem;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:var(--court);
+  }
+  .pista em{ font-style:normal; display:block; font-family:'Anton',sans-serif; font-size:1rem; color:var(--ink); letter-spacing:0; }
+  .vs{ font-size:0.94rem; line-height:1.4; }
+  .vs b{ font-weight:600; }
+  .vs .x{ color:var(--muted); font-weight:400; padding:0 6px; font-size:0.8rem; }
+  .vs .win{ color:var(--court-deep,var(--court)); font-weight:700; }
+  .vs .note{ font-size:0.68rem; color:var(--muted); font-weight:500; }
+  .rest-line{
+    padding:12px 18px 16px;
+    border-top:1px solid var(--line);
+    font-size:0.82rem;
+    color:var(--muted);
+  }
+  .rest-line b{ color:var(--ink); font-weight:600; }
+
+  /* ---------- PLANTILLA EN BLANCO ---------- */
+  .blank-card .match{ grid-template-columns:56px 1fr; }
+  .blank-line{
+    display:inline-block;
+    min-width:150px;
+    border-bottom:1.5px dotted var(--line-strong);
+    height:1.1em;
+  }
+  .blank-vs{ display:flex; align-items:center; gap:8px; font-size:0.9rem; color:var(--muted); }
+  .blank-rest{
+    padding:12px 18px 16px;
+    border-top:1px solid var(--line);
+    font-size:0.82rem;
+    color:var(--muted);
+    display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+  }
+
+  footer{
+    margin-top:64px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+    font-size:0.82rem;
+    color:var(--muted);
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Preboda · 🔒 Gonzalo &amp; Rebeca</div>
+    <h1>El Pozo de Mónico</h1>
+    <p class="lede">Pozo de pádel con escalera: quien gana sube de pista, quien pierde descansa un turno y vuelve a entrar en el siguiente. Nadie se queda fuera más de una ronda.</p>
+    <div class="hero-facts">
+      <div class="fact"><b>24</b> jugadores</div>
+      <div class="fact"><b>12</b> parejas</div>
+      <div class="fact"><b>4</b> pistas</div>
+      <div class="fact"><b>6</b> rondas</div>
+      <div class="fact"><b>máx. 1</b> ronda de descanso seguida</div>
+      <div class="fact"><b>18:00–20:00</b> duración</div>
+    </div>
+  </header>
+
+  <section id="explicacion">
+    <div class="section-head"><h2>Cómo funciona</h2></div>
+    <div class="explain-grid">
+      <div class="explain">
+        <p>Es un pozo de verdad: <strong>ganas y subes de pista, pierdes y descansas</strong> — pero solo una ronda. En la siguiente vuelves a entrar automáticamente, así que nunca hay nadie aparcado más tiempo del que tarda un cambio de ronda.</p>
+        <p>Cada ronda hay exactamente 4 partidos (8 parejas jugando) y 4 parejas descansando. Al terminar, los 4 perdedores se van a descansar y los 4 que descansaban entran a ocupar su sitio. El orden de entrada tampoco hay que decidirlo: <strong>entra más arriba quien perdió más arriba</strong> la última vez que jugó.</p>
+        <p>No hace falta sumar puntos: solo hay que recordar, partido a partido, quién ganó. El diagrama de la derecha es la única regla que hay que aplicar cada ronda.</p>
+        <div class="callout">Gonzalo &amp; Rebeca se mantienen siempre como pareja fija — suben, bajan y descansan como cualquier otra pareja, pero nunca cambian de compañero.</div>
+      </div>
+      <div class="ladder-card">
+        <h3>La escalera, ronda a ronda</h3>
+        <div class="ladder-row">
+          <div class="lp">Pista<span>arriba</span>5</div>
+          <div class="lline"><b class="win">Gana</b> → se queda en pista 5</div>
+        </div>
+        <div class="ladder-row">
+          <div class="lp">Pista<span></span>6</div>
+          <div class="lline"><b class="win">Gana</b> <span class="arrow">↑</span> sube a pista 5</div>
+        </div>
+        <div class="ladder-row">
+          <div class="lp">Pista<span></span>7</div>
+          <div class="lline"><b class="win">Gana</b> <span class="arrow">↑</span> sube a pista 6</div>
+        </div>
+        <div class="ladder-row">
+          <div class="lp">Pista<span>abajo</span>8</div>
+          <div class="lline"><b class="win">Gana</b> <span class="arrow">↑</span> sube a pista 7</div>
+        </div>
+        <div class="ladder-row" style="border-top:2px solid var(--line-strong); margin-top:4px;">
+          <div class="lp" style="color:var(--muted);">Todas</div>
+          <div class="lline"><b class="lose">Pierde</b> → descansa la ronda siguiente</div>
+        </div>
+        <h3 style="margin-top:18px;">La vuelta al pozo, un turno después</h3>
+        <div class="ladder-row">
+          <div class="lp">Perdió<span>en</span>5</div>
+          <div class="lline">vuelve <span class="arrow">→</span> entra en pista 6</div>
+        </div>
+        <div class="ladder-row">
+          <div class="lp">Perdió<span>en</span>6</div>
+          <div class="lline">vuelve <span class="arrow">→</span> entra en pista 7</div>
+        </div>
+        <div class="ladder-row">
+          <div class="lp">Perdió<span>en</span>7</div>
+          <div class="lline">vuelve <span class="arrow">→</span> entra en pista 8</div>
+        </div>
+        <div class="ladder-row">
+          <div class="lp">Perdió<span>en</span>8</div>
+          <div class="lline">vuelve <span class="arrow">→</span> entra en pista 8 (la otra plaza)</div>
+        </div>
+        <div class="ladder-entry">La pareja que perdió más arriba entra más arriba al volver — como cada ronda pierde exactamente una pareja por pista, nunca hay dos parejas empatadas para la misma plaza. <b>Única excepción:</b> las 4 que descansan en la Ronda 1 no han perdido en ningún sitio todavía, así que entran en la Ronda 2 por orden de pareja (1ª → pista 6, 2ª → pista 7, 3ª y 4ª → pista 8) — un caso único que no se repite.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ronda1">
+    <div class="section-head"><h2>Ronda 1 · punto de partida</h2><span class="n">18:00–18:18</span></div>
+    <div class="rounds" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));">
+      <div class="round-card">
+        <div class="round-head"><div class="r-num">R1 <span>RONDA</span></div></div>
+        <div class="matches">
+          <div class="match"><div class="pista">Pista<em>5</em></div><div class="vs"><b>Moni+Vicen</b><span class="x">vs</span><b>Laura+Espinos</b></div></div>
+          <div class="match"><div class="pista">Pista<em>6</em></div><div class="vs"><b>Chus+Baquero</b><span class="x">vs</span><b>Tito+Mayoral</b></div></div>
+          <div class="match"><div class="pista">Pista<em>7</em></div><div class="vs"><b>Sergio+Pablo</b><span class="x">vs</span><b>Antonio+Miguel</b></div></div>
+          <div class="match"><div class="pista">Pista<em>8</em></div><div class="vs"><b>Luiska+Gómez</b><span class="x">vs</span><b>Luna+Marina</b></div></div>
+        </div>
+        <div class="rest-line"><b>Descansan:</b> Alejandro+Nacho Moldes, Manterola+Nacho Gómez, Gonzalo+Rebeca, Pallín+Carmen — entrarán en Ronda 2 en este orden: Alejandro+Nacho Moldes → pista 6, Manterola+Nacho Gómez → pista 7, Gonzalo+Rebeca y Pallín+Carmen → pista 8.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="simulacion">
+    <div class="section-head"><h2>Simulación de ejemplo</h2><span class="n">Resultados inventados solo para ver cómo se mueve todo</span></div>
+    <p style="max-width:66ch; color:var(--muted); margin:-6px 0 20px; font-size:0.92rem;">Nadie sabe todavía quién va a ganar el viernes — esto no es una predicción. Es la Ronda 1 jugada con un resultado cualquiera, para comprobar que la escalera funciona sola, sin que nadie tenga que pensar dónde va cada pareja.</p>
+    <div class="rounds">
+
+      <div class="round-card example">
+        <div class="round-head"><div class="r-num">R2 <span>RONDA</span></div><time>18:20–18:38</time><span class="tag-example">Ejemplo</span></div>
+        <div class="matches">
+          <div class="match"><div class="pista">Pista<em>5</em></div><div class="vs"><span class="win">Moni+Vicen</span><span class="x">vs</span><b>Tito+Mayoral</b><br><span class="note">(Moni+Vicen ganó en pista 5 · Tito+Mayoral subió al ganar en la 6)</span></div></div>
+          <div class="match"><div class="pista">Pista<em>6</em></div><div class="vs"><span class="win">Antonio+Miguel</span><span class="x">vs</span><b>Alejandro+Nacho Moldes</b><br><span class="note">(Antonio+Miguel subió al ganar en la 7 · Alejandro+Nacho Moldes entra — excepción R1→R2, orden de pareja)</span></div></div>
+          <div class="match"><div class="pista">Pista<em>7</em></div><div class="vs"><span class="win">Luiska+Gómez</span><span class="x">vs</span><b>Manterola+Nacho Gómez</b><br><span class="note">(Luiska+Gómez subió al ganar en la 8 · Manterola+Nacho Gómez entra — misma excepción)</span></div></div>
+          <div class="match"><div class="pista">Pista<em>8</em></div><div class="vs"><span class="win">Gonzalo+Rebeca</span><span class="x">vs</span><b>Pallín+Carmen</b><br><span class="note">(las dos entran por la excepción de la R1 — de aquí en adelante ya no hará falta esta excepción)</span></div></div>
+        </div>
+        <div class="rest-line"><b>Descansan en R3:</b> Laura+Espinos (perdió en pista 5), Chus+Baquero (pista 6), Sergio+Pablo (pista 7), Luna+Marina (pista 8).</div>
+      </div>
+
+      <div class="round-card example">
+        <div class="round-head"><div class="r-num">R3 <span>RONDA</span></div><time>18:40–18:58</time><span class="tag-example">Ejemplo</span></div>
+        <div class="matches">
+          <div class="match"><div class="pista">Pista<em>5</em></div><div class="vs"><b>Moni+Vicen</b><span class="x">vs</span><b>Alejandro+Nacho Moldes</b><br><span class="note">Moni+Vicen lleva ya 3 rondas reinando en pista 5</span></div></div>
+          <div class="match"><div class="pista">Pista<em>6</em></div><div class="vs"><b>Manterola+Nacho Gómez</b><span class="x">vs</span><b>Laura+Espinos</b><br><span class="note">Laura+Espinos entra en pista 6: perdió en la 5 en la R1, es la que más arriba había llegado</span></div></div>
+          <div class="match"><div class="pista">Pista<em>7</em></div><div class="vs"><b>Gonzalo+Rebeca</b><span class="x">vs</span><b>Chus+Baquero</b><br><span class="note">Chus+Baquero entra en pista 7: perdió en la 6 en la R1</span></div></div>
+          <div class="match"><div class="pista">Pista<em>8</em></div><div class="vs"><b>Sergio+Pablo</b><span class="x">vs</span><b>Luna+Marina</b><br><span class="note">Sergio+Pablo (perdió en la 7) y Luna+Marina (perdió en la 8) ocupan las dos plazas de pista 8</span></div></div>
+        </div>
+        <div class="rest-line"><b>Descansan en R4:</b> Tito+Mayoral, Antonio+Miguel, Luiska+Gómez, Pallín+Carmen — dependerá de quién pierda aquí en adelante, ya no es un ejemplo, es la mecánica corriendo sola.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="plantillas">
+    <div class="section-head"><h2>Plantilla para R4 · R5 · R6</h2><span class="n">Se rellena a mano según los resultados reales</span></div>
+    <div class="rounds">
+
+      <div class="round-card blank-card">
+        <div class="round-head"><div class="r-num">R4 <span>RONDA</span></div><time>19:00–19:18</time></div>
+        <div class="matches">
+          <div class="match"><div class="pista">Pista<em>5</em></div><div class="blank-vs"><span class="blank-line"></span> vs <span class="blank-line"></span></div></div>
+          <div class="match"><div class="pista">Pista<em>6</em></div><div class="blank-vs"><span class="blank-line"></span> vs <span class="blank-line"></span></div></div>
+          <div class="match"><div class="pista">Pista<em>7</em></div><div class="blank-vs"><span class="blank-line"></span> vs <span class="blank-line"></span></div></div>
+          <div class="match"><div class="pista">Pista<em>8</em></div><div class="blank-vs"><span class="blank-line"></span> vs <span class="blank-line"></span></div></div>
+        </div>
+        <div class="blank-rest"><b>Descansan:</b><span class="blank-line" style="min-width:90%;"></span></div>
+      </div>
+
+      <div class="round-card blank-card">
+        <div class="round-head"><div class="r-num">R5 <span>RONDA</span></div><time>19:20–19:38</time></div>
+        <div class="matches">
+          <div class="match"><div class="pista">Pista<em>5</em></div><div class="blank-vs"><span class="blank-line"></span> vs <span class="blank-line"></span></div></div>
+          <div class="match"><div class="pista">Pista<em>6</em></div><div class="blank-vs"><span class="blank-line"></span> vs <span class="blank-line"></span></div></div>
+          <div class="match"><div class="pista">Pista<em>7</em></div><div class="blank-vs"><span class="blank-line"></span> vs <span class="blank-line"></span></div></div>
+          <div class="match"><div class="pista">Pista<em>8</em></div><div class="blank-vs"><span class="blank-line"></span> vs <span class="blank-line"></span></div></div>
+        </div>
+        <div class="blank-rest"><b>Descansan:</b><span class="blank-line" style="min-width:90%;"></span></div>
+      </div>
+
+      <div class="round-card blank-card">
+        <div class="round-head"><div class="r-num">R6 <span>RONDA</span></div><time>19:40–19:58</time></div>
+        <div class="matches">
+          <div class="match"><div class="pista">Pista<em>5</em></div><div class="blank-vs"><span class="blank-line"></span> vs <span class="blank-line"></span></div></div>
+          <div class="match"><div class="pista">Pista<em>6</em></div><div class="blank-vs"><span class="blank-line"></span> vs <span class="blank-line"></span></div></div>
+          <div class="match"><div class="pista">Pista<em>7</em></div><div class="blank-vs"><span class="blank-line"></span> vs <span class="blank-line"></span></div></div>
+          <div class="match"><div class="pista">Pista<em>8</em></div><div class="blank-vs"><span class="blank-line"></span> vs <span class="blank-line"></span></div></div>
+        </div>
+        <div class="blank-rest"><b>Descansan:</b><span class="blank-line" style="min-width:90%;"></span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="pareja13">
+    <div class="section-head"><h2>Pareja 13 · incorporación de última hora</h2><span class="n">David + Juanfran</span></div>
+    <div class="callout" style="margin-top:0;">No hace falta fijar en qué ronda entran. Regla genérica, se aplica el mismo día en la ronda que sea (a partir de la R3): la pareja a la que le tocaba entrar en <b>pista 8</b> esa ronda se queda un turno más descansando, y en su sitio entra <b>David + Juanfran</b>. A partir de ahí, juegan la misma escalera que todos: ganan y suben, pierden y descansan un turno.</div>
+  </section>
+
+  <footer>
+    Ronda 1 fija. A partir de ahí, la escalera se juega sola: gana y sube, pierde y descansa una ronda, vuelve a entrar en la siguiente. 19:58–20:00, foto y cierre.
+  </footer>
+
+</div>
